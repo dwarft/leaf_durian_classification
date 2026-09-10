@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Deteksi Penyakit Daun Durian</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-100 min-h-screen py-10 px-4 flex flex-col items-center">
+
+    <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-extrabold text-emerald-700 mb-2">🍃 Durian Leaf AI Detector</h1>
+            <p class="text-slate-500 text-sm">Sistem Pakar Identifikasi Penyakit Daun Durian Berbasis Deep Learning</p>
+        </div>
+
+        <!-- Form Upload -->
+        <form action="/" method="POST" enctype="multipart/form-data" class="space-y-4 mb-8">
+            <div class="border-2 border-dashed border-emerald-300 bg-emerald-50/50 p-6 rounded-xl text-center hover:bg-emerald-50 transition cursor-pointer flex flex-col items-center">
+                <input type="file" id="fileInput" name="file" accept="image/*" required onchange="previewSelectedImage(event)" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer">
+                
+                <div id="clientPreviewContainer" class="hidden mt-4">
+                    <p class="text-xs text-slate-500 mb-2 font-semibold">Preview Gambar Dipilih:</p>
+                    <img id="clientPreview" src="#" alt="Preview" class="max-h-48 rounded-lg shadow-md border border-slate-200">
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-emerald-600/30">
+                🔍 Analisis Daun Sekarang
+            </button>
+        </form>
+
+        <!-- Jika Gambar Bukan Daun Durian / Di bawah Threshold -->
+        {% if not_durian %}
+        <div class="p-6 bg-amber-50 border border-amber-300 rounded-2xl text-amber-800 space-y-4 mb-6">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">⚠️</span>
+                <h2 class="text-lg font-bold">Objek Tidak Terdeteksi Sebagai Daun Durian</h2>
+            </div>
+            <p class="text-sm text-amber-700">Tingkat keyakinan tertinggi hanya <strong>{{ confidence }}%</strong>. Harap unggah foto daun durian yang lebih jelas dan terfokus.</p>
+            
+            {% if image_url %}
+            <div class="mt-2 text-center">
+                <p class="text-xs font-semibold text-slate-500 mb-1">Gambar yang Diunggah:</p>
+                <img src="{{ image_url }}" alt="Uploaded Image" class="max-h-56 mx-auto rounded-lg border shadow-sm">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Tampilan Hasil Diagnosa Lengkap -->
+        {% if hasil %}
+        <div class="space-y-6">
+            <!-- Header Hasil -->
+            <div class="p-6 bg-emerald-700 text-white rounded-2xl shadow-md">
+                <p class="text-emerald-200 text-xs font-semibold uppercase tracking-wider mb-1">Hasil Diagnosa AI</p>
+                <div class="flex justify-between items-baseline">
+                    <h2 class="text-3xl font-black">{{ hasil }}</h2>
+                    <span class="bg-emerald-800 text-emerald-100 text-sm font-bold px-3 py-1 rounded-full border border-emerald-500">
+                        Akurasi: {{ confidence }}%
+                    </span>
+                </div>
+                <p class="text-emerald-100 text-sm italic mt-2">Nama Lokal: {{ info.nama_lain }}</p>
+            </div>
+
+            <!-- Preview Gambar Hasil Upload -->
+            {% if image_url %}
+            <div class="text-center">
+                <p class="text-xs font-semibold text-slate-500 mb-2">Gambar yang Dianalisis:</p>
+                <img src="{{ image_url }}" alt="Hasil Analisis" class="max-h-60 mx-auto rounded-xl border border-slate-200 shadow-md">
+            </div>
+            {% endif %}
+
+            <!-- Detail Penyakit -->
+            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200 space-y-4">
+                <div>
+                    <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-1">📌 Deskripsi Penyakit</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">{{ info.penjelasan }}</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-100">
+                        <h4 class="text-xs font-bold text-emerald-800 uppercase mb-1">🛡️ Tindakan Pencegahan</h4>
+                        <p class="text-emerald-900 text-xs leading-relaxed">{{ info.pencegahan }}</p>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <h4 class="text-xs font-bold text-blue-800 uppercase mb-1">💊 Pengobatan & Obat</h4>
+                        <p class="text-blue-900 text-xs leading-relaxed">{{ info.pengobatan }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Bar Chart Probabilitas (Selalu tampil jika ada hasil analisis/klasifikasi) -->
+        {% if probabilities %}
+        <div class="mt-8 bg-slate-50 p-5 rounded-xl border border-slate-200">
+            <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wide mb-4">📊 Distribusi Probabilitas Klasifikasi AI</h3>
+            <div class="relative h-64">
+                <canvas id="probabilityChart"></canvas>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+    <script>
+        function previewSelectedImage(event) {
+            const input = event.target;
+            const container = document.getElementById('clientPreviewContainer');
+            const preview = document.getElementById('clientPreview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    container.classList.remove('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        {% if probabilities %}
+        const labels = {{ labels | tojson }};
+        const data = {{ probabilities | tojson }};
+
+        const ctx = document.getElementById('probabilityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Probabilitas (%)',
+                    data: data,
+                    backgroundColor: [
+                        '#059669', '#10B981', '#34D399', '#6EE7B7', '#A7F3D0', '#64748B'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.raw + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            callback: function(value) { return value + '%'; }
+                        }
+                    }
+                }
+            }
+        });
+        {% endif %}
+    </script>
+</body>
+</html>
