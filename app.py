@@ -4,6 +4,7 @@ from tensorflow.keras.layers import Dense
 import numpy as np
 from PIL import Image
 import os
+import cv2  # Import OpenCV untuk deteksi bentuk & warna daun
 
 app = Flask(__name__)
 
@@ -57,7 +58,6 @@ UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Urutan ini harus sama dengan urutan folder/class saat model dilatih.
 CLASS_NAMES = ['Antraknosa', 'Bercak_Algae', 'Hawar_Daun', 'Kanker_Batang', 'Penyakit_Lain', 'Sehat']
 
 def build_and_load_model(model_path):
@@ -78,12 +78,47 @@ if model.output_shape[-1] != len(CLASS_NAMES):
         f'({model.output_shape[-1]}).'
     )
 
+# =========================================================
+# FUNGSI FILTER OPENCV (DITARUH DI SINI)
+# =========================================================
+def is_leaf_shape(image_path):
+    img = cv2.imread(image_path)
+    if img is None:
+        return False
+
+    img = cv2.resize(img, (300, 300))
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    
+    # Deteksi warna hijau, kuning kecokelatan, & cokelat daun
+    lower_leaf = np.array([10, 25, 25])
+    upper_leaf = np.array([90, 255, 255])
+    
+    mask = cv2.inRange(hsv, lower_leaf, upper_leaf)
+    
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not contours:
+        return False
+
+    max_contour = max(contours, key=cv2.contourArea)
+    area = cv2.contourArea(max_contour)
+    total_area = img.shape[0] * img.shape[1]
+    
+    # Foto daun dapat memiliki latar luas atau pencahayaan yang tidak merata.
+    if (area / total_area) < 0.015:
+        return False
+
+    # Rasio dan solidity sengaja tidak dijadikan penolakan keras karena daun
+    # dapat terlipat, terpotong, atau tertutup bayangan.
+    return True
+
 def preprocess_image(image_path):
     img = Image.open(image_path).convert('RGB')
     img = img.resize((224, 224))
     img_array = np.array(img, dtype=np.float32)
-
-    # Model sudah memiliki layer Rescaling(1/255); jangan rescale lagi di sini.
     img_batch = np.expand_dims(img_array, axis=0)
     return img_batch
 
@@ -104,20 +139,24 @@ def index():
         if file:
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filepath)
+            image_url = f"/uploads/{file.filename}"
 
+            # 1. Prediksi memakai skala input yang sama dengan saat MobileNetV2 dilatih.
+            shape_valid = is_leaf_shape(filepath)
             processed_img = preprocess_image(filepath)
             predictions = model.predict(processed_img)[0]
             
             all_prob = [round(float(p) * 100, 2) for p in predictions]
-            
             predicted_idx = np.argmax(predictions)
             hasil_prediksi = CLASS_NAMES[predicted_idx]
             keyakinan = all_prob[predicted_idx]
 
-            image_url = f"/uploads/{file.filename}"
-
-            # Threshold dibendung pada 40%
-            if keyakinan < 40.0:
+            # Foto yang gagal pemeriksaan bentuk harus memiliki keyakinan lebih tinggi.
+            sorted_predictions = np.sort(predictions)
+            prediction_margin = float(sorted_predictions[-1] - sorted_predictions[-2])
+            minimum_confidence = 65.0 if shape_valid else 85.0
+            minimum_margin = 0.15 if shape_valid else 0.30
+            if keyakinan < minimum_confidence or prediction_margin < minimum_margin:
                 return render_template('index.html', 
                                        filename=file.filename,
                                        image_url=image_url,
