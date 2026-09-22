@@ -5,134 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DurianAI — Deteksi Penyakit Daun Durian</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .bg-noise-text {
-            font-size: 9rem;
-            font-weight: 900;
-            line-height: 1;
-            color: rgba(255,255,255,0.045);
-            letter-spacing: -0.02em;
-            user-select: none;
+        :root{
+            --ink:#101B09;
+            --forest:#16260C;
+            --forest-2:#1F3610;
+            --canvas:#F5F2E6;
+            --canvas-card:#FBFAF3;
+            --line:#DEDACB;
+            --lime:#AEF23B;
+            --lime-deep:#8FCC22;
+            --gold:#C79A3F;
+            --sage:#57644A;
+            --sage-dim:#8C876E;
         }
+        body{ font-family:'Plus Jakarta Sans', sans-serif; background:var(--canvas); color:var(--ink); }
+        .font-display{ font-family:'Fraunces', serif; font-variation-settings:"opsz" 40; }
+        .leaf-vein{ position:absolute; inset:0; opacity:.06; pointer-events:none; }
+        .grain{ position:absolute; inset:0; opacity:.5; mix-blend-mode:multiply; pointer-events:none;
+            background-image:radial-gradient(rgba(16,27,9,.5) .6px, transparent .6px);
+            background-size:3px 3px; }
+        ::selection{ background:var(--lime); color:var(--ink); }
+        .num-chip{ font-family:'Fraunces', serif; font-variation-settings:"opsz" 20; }
     </style>
 </head>
-<body class="bg-[#EFEEE7] text-[#132006] min-h-screen">
+<body class="min-h-screen">
 
     <!-- Navbar -->
-    <header class="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <span class="text-2xl">🍃</span>
-            <span class="font-extrabold text-xl tracking-tight text-[#132006]">DurianAI</span>
+    <header class="max-w-6xl mx-auto px-6 py-7 flex justify-between items-center">
+        <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--forest);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 2C7 6 4 11 4 15a8 8 0 0 0 16 0c0-4-3-9-8-13Z" fill="#AEF23B"/></svg>
+            </span>
+            <span class="font-display font-semibold text-xl tracking-tight" style="color:var(--forest);">DurianAI</span>
         </div>
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#526138]">
-            <a href="#" class="hover:text-[#132006] transition">Beranda</a>
-            <a href="#penyakit-section" class="hover:text-[#132006] transition">Katalog Penyakit</a>
-            <a href="#analisis-section" class="hover:text-[#132006] transition">Diagnosa</a>
-            <a href="#cara-kerja" class="hover:text-[#132006] transition">Cara Kerja</a>
+        <nav class="hidden md:flex items-center gap-9 text-[13px] font-medium" style="color:var(--sage);">
+            <a href="#" class="hover:text-[color:var(--forest)] transition">Beranda</a>
+            <a href="#penyakit-section" class="hover:text-[color:var(--forest)] transition">Katalog Penyakit</a>
+            <a href="#analisis-section" class="hover:text-[color:var(--forest)] transition">Diagnosa</a>
+            <a href="#cara-kerja" class="hover:text-[color:var(--forest)] transition">Cara Kerja</a>
         </nav>
-        <div class="flex items-center gap-4">
-            <a href="#" class="hidden sm:inline text-sm font-semibold text-[#132006] hover:opacity-70 transition">Masuk</a>
-            <a href="#analisis-section" class="bg-[#132006] text-[#AEF23B] font-bold text-xs px-5 py-2.5 rounded-full hover:bg-[#22380D] transition shadow-sm">
+        <div class="flex items-center gap-5">
+            <a href="#" class="hidden sm:inline text-[13px] font-semibold hover:opacity-70 transition" style="color:var(--forest);">Masuk</a>
+            <a href="#analisis-section" class="font-bold text-[13px] px-5 py-2.5 rounded-full transition shadow-sm" style="background:var(--forest); color:var(--lime);">
                 Coba Sekarang
             </a>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-10 space-y-24">
+    <main class="max-w-6xl mx-auto px-6 py-8 space-y-28">
 
-        <!-- HERO SECTION -->
-        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <!-- Teks Utama (Kiri) -->
+        <!-- HERO -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-6 space-y-7">
-                <h1 class="text-4xl lg:text-[3.2rem] font-extrabold leading-[1.08] text-[#132006]">
-                    Kenali penyakit daun durian sebelum menyebar ke seluruh kebun
+                <h1 class="font-display font-semibold text-[2.65rem] lg:text-[3.4rem] leading-[1.05] tracking-tight" style="color:var(--ink);">
+                    Kenali penyakit daun durian sebelum ia menyebar ke seluruh kebun
                 </h1>
-                <p class="text-[#4E5D38] text-base leading-relaxed max-w-md">
-                    Foto satu daun, dan sistem akan membaca gejalanya untuk Anda — cepat, presisi, dan didukung model pembelajaran mesin yang dilatih khusus untuk tanaman durian. Anda akan menerima hasil diagnosa, tingkat akurasi, serta rekomendasi pencegahan dan pengobatan.
+                <p class="text-[15px] leading-relaxed max-w-md" style="color:var(--sage);">
+                    Potret satu lembar daun, sistem membaca gejalanya untuk Anda. Model pembelajaran mesin yang dilatih khusus untuk daun durian membalas dengan diagnosa, tingkat akurasi, serta langkah pencegahan dan pengobatan yang sesuai.
                 </p>
-                <div class="flex flex-wrap items-center gap-4 pt-1">
-                    <a href="#analisis-section" class="bg-[#AEF23B] text-[#132006] font-bold text-sm px-6 py-3.5 rounded-full hover:bg-[#95D91F] transition shadow-sm">
+                <div class="flex flex-wrap items-center gap-5 pt-1">
+                    <a href="#analisis-section" class="font-bold text-sm px-6 py-3.5 rounded-full transition shadow-sm" style="background:var(--lime); color:var(--ink);">
                         Unggah Foto Daun
                     </a>
-                    <a href="#cara-kerja" class="flex items-center gap-2 text-sm font-bold text-[#132006] hover:opacity-70 transition">
-                        <span class="w-9 h-9 rounded-full bg-[#132006] text-[#AEF23B] flex items-center justify-center">▶</span>
+                    <a href="#cara-kerja" class="flex items-center gap-2.5 text-sm font-bold" style="color:var(--forest);">
+                        <span class="w-9 h-9 rounded-full flex items-center justify-center text-[11px]" style="background:var(--forest); color:var(--lime);">▶</span>
                         Lihat cara kerjanya
                     </a>
                 </div>
-                <div class="h-px bg-[#D8D5C7] max-w-md"></div>
+                <div class="h-px max-w-md" style="background:var(--line);"></div>
                 <div class="flex flex-wrap gap-2">
-                    <span class="border border-[#C9C6B7] text-[#4E5D38] text-xs font-semibold px-3.5 py-1.5 rounded-full">Antraknosa</span>
-                    <span class="border border-[#C9C6B7] text-[#4E5D38] text-xs font-semibold px-3.5 py-1.5 rounded-full">Hawar Daun</span>
-                    <span class="border border-[#C9C6B7] text-[#4E5D38] text-xs font-semibold px-3.5 py-1.5 rounded-full">Bercak Algae</span>
+                    <span class="border text-xs font-semibold px-3.5 py-1.5 rounded-full" style="border-color:var(--line); color:var(--sage);">Antraknosa</span>
+                    <span class="border text-xs font-semibold px-3.5 py-1.5 rounded-full" style="border-color:var(--line); color:var(--sage);">Hawar Daun</span>
+                    <span class="border text-xs font-semibold px-3.5 py-1.5 rounded-full" style="border-color:var(--line); color:var(--sage);">Bercak Algae</span>
                 </div>
             </div>
 
-            <!-- Kartu Visual (Kanan) -->
-            <div class="lg:col-span-6 relative flex justify-center items-center py-8">
-                <div class="absolute inset-0 flex items-center justify-center -z-10">
-                    <div class="w-[26rem] h-[26rem] rounded-full border border-[#C9C6B7]/70"></div>
+            <!-- Visual -->
+            <div class="lg:col-span-6 relative flex justify-center items-center py-6">
+                <svg class="absolute -z-10 opacity-[.08]" width="440" height="440" viewBox="0 0 200 200" style="color:var(--forest);">
+                    <path d="M100 10C60 40 20 80 20 120a80 80 0 0 0 160 0c0-40-40-80-80-110Z" stroke="currentColor" stroke-width="1" fill="none"/>
+                    <path d="M100 30V190" stroke="currentColor" stroke-width="1"/>
+                </svg>
+
+                <div class="absolute -top-4 left-0 md:left-4 rounded-2xl shadow-md border px-4 py-3.5 w-[9.5rem] z-20" style="background:var(--canvas-card); border-color:var(--line);">
+                    <p class="text-[10px] font-bold uppercase tracking-wide" style="color:var(--sage-dim);">Akurasi model</p>
+                    <div class="flex items-end gap-1 mt-2.5 h-7">
+                        <div class="w-1.5 rounded-sm h-3" style="background:var(--line);"></div>
+                        <div class="w-1.5 rounded-sm h-4" style="background:var(--line);"></div>
+                        <div class="w-1.5 rounded-sm h-7" style="background:var(--lime);"></div>
+                        <div class="w-1.5 rounded-sm h-5" style="background:var(--line);"></div>
+                        <div class="w-1.5 rounded-sm h-6" style="background:var(--line);"></div>
+                    </div>
+                    <p class="font-display font-semibold text-xl mt-1.5" style="color:var(--ink);">98,4%</p>
                 </div>
 
-                <!-- Mini stat card mengambang -->
-                <div class="absolute -top-3 left-2 md:left-6 bg-white rounded-2xl shadow-md border border-[#E3E1D6] px-4 py-3 w-40 z-20">
-                    <p class="text-[10px] font-bold text-[#8A8672] uppercase tracking-wide">Akurasi Model</p>
-                    <div class="flex items-end gap-0.5 mt-2 h-8">
-                        <div class="w-2 bg-[#D8D5C7] rounded-sm h-3"></div>
-                        <div class="w-2 bg-[#D8D5C7] rounded-sm h-5"></div>
-                        <div class="w-2 bg-[#AEF23B] rounded-sm h-8"></div>
-                        <div class="w-2 bg-[#D8D5C7] rounded-sm h-4"></div>
-                        <div class="w-2 bg-[#D8D5C7] rounded-sm h-6"></div>
-                    </div>
-                    <p class="text-sm font-black text-[#132006] mt-1">98.4%</p>
-                </div>
-
-                <!-- Kartu belakang: lime, scanner status -->
-                <div class="absolute top-8 right-2 md:right-8 w-72 h-44 bg-gradient-to-br from-[#AEF23B] to-[#C6F76B] rounded-[2rem] p-5 shadow-lg transform rotate-6 border border-white/40 opacity-95">
-                    <div class="flex justify-between items-center text-[#132006]">
-                        <span class="text-xs font-black tracking-wide uppercase">Scanner Status</span>
-                        <span class="text-xs font-bold flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#132006]"></span>Ready</span>
-                    </div>
-                    <div class="mt-9 text-[#132006]">
-                        <div class="text-3xl font-black">98.4%</div>
-                        <div class="text-[10px] font-semibold opacity-80">Tingkat Akurasi Identifikasi dan juga Deteksi Penyakit</div>
-                    </div>
-                </div>
-
-                <!-- Kartu depan: dark, hasil AI -->
-                <div class="relative w-full max-w-md bg-gradient-to-br from-[#132006] via-[#1A3300] to-[#0A1500] text-white p-7 rounded-[2.5rem] shadow-2xl border border-[#AEF23B]/20 z-10 mt-16">
-                    <div class="flex justify-between items-center mb-6">
+                <div class="relative w-full max-w-md text-white p-7 rounded-[2rem] shadow-2xl border z-10 mt-10" style="background:linear-gradient(155deg, var(--forest) 0%, #0B1503 100%); border-color:rgba(174,242,59,.18);">
+                    <div class="flex justify-between items-center mb-7">
                         <div class="flex items-center gap-2">
-                            <div class="w-3 h-3 rounded-full bg-[#AEF23B]"></div>
-                            <span class="text-xs font-bold text-[#AEF23B] uppercase tracking-wider">Durian Care AI</span>
+                            <span class="w-2 h-2 rounded-full" style="background:var(--lime);"></span>
+                            <span class="text-xs font-bold tracking-wide" style="color:var(--lime);">Durian Care AI</span>
                         </div>
-                        <span class="text-xs font-mono text-gray-400">v2.1</span>
+                        <span class="text-[11px] font-mono text-white/35">v2.1</span>
                     </div>
-                    <div class="space-y-4 mb-6">
-                        <div class="bg-[#22380D]/60 p-4 rounded-2xl border border-[#AEF23B]/20 flex items-center justify-between">
+                    <div class="space-y-3.5 mb-6">
+                        <div class="p-4 rounded-2xl border flex items-center justify-between" style="background:rgba(255,255,255,.04); border-color:rgba(174,242,59,.14);">
                             <div>
-                                <p class="text-[11px] text-gray-400">Status Daun</p>
-                                <p class="text-sm font-bold text-white">Monitoring Aktif</p>
+                                <p class="text-[11px] text-white/45">Status daun</p>
+                                <p class="text-sm font-bold text-white">Monitoring aktif</p>
                             </div>
-                            <span class="text-xl">🛡️</span>
+                            <span class="text-lg">🛡️</span>
                         </div>
-                        <div class="bg-[#22380D]/60 p-4 rounded-2xl border border-[#AEF23B]/20 flex items-center justify-between">
+                        <div class="p-4 rounded-2xl border flex items-center justify-between" style="background:rgba(255,255,255,.04); border-color:rgba(174,242,59,.14);">
                             <div>
-                                <p class="text-[11px] text-gray-400">Penyakit Tercover</p>
-                                <p class="text-sm font-bold text-[#AEF23B]">5 Kategori Utama</p>
+                                <p class="text-[11px] text-white/45">Penyakit tercakup</p>
+                                <p class="text-sm font-bold" style="color:var(--lime);">5 kategori utama</p>
                             </div>
-                            <span class="text-xl">🌿</span>
+                            <span class="text-lg">🌿</span>
                         </div>
                     </div>
-                    <div class="flex justify-between items-center text-xs text-gray-400 pt-4 border-t border-white/10">
+                    <div class="flex justify-between items-center text-[11px] text-white/40 pt-4 border-t border-white/10">
                         <span>Dataset: Leaf Durian</span>
-                        <span class="font-bold text-[#AEF23B]">Sistem Pakar</span>
+                        <span class="font-bold" style="color:var(--lime);">Sistem pakar</span>
                     </div>
                 </div>
 
-                <!-- Bulatan kecil pojok -->
-                <div class="absolute -bottom-2 right-6 w-11 h-11 rounded-full bg-[#AEF23B] flex items-center justify-center shadow-md z-20">
+                <div class="absolute -bottom-3 right-2 md:right-6 w-11 h-11 rounded-full flex items-center justify-center shadow-md z-20" style="background:var(--lime);">
                     <span class="text-base">🔎</span>
                 </div>
             </div>
@@ -140,157 +140,149 @@
 
         <!-- STRIP TEKNOLOGI -->
         <section class="space-y-6">
-            <p class="text-center text-xs font-bold text-[#8A8672] uppercase tracking-widest">Ditenagai oleh</p>
-            <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-4 text-[#8A8672]">
-                <span class="font-black text-lg tracking-tight">MobileNetV2</span>
-                <span class="font-black text-lg tracking-tight">TensorFlow</span>
-                <span class="font-black text-lg tracking-tight">Keras</span>
-                <span class="font-black text-lg tracking-tight">Flask</span>
-                <span class="font-black text-lg tracking-tight">OpenCV</span>
+            <div class="h-px" style="background:var(--line);"></div>
+            <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-3" style="color:var(--sage-dim);">
+                <span class="font-display font-semibold text-base">MobileNetV2</span>
+                <span class="font-display font-semibold text-base">TensorFlow</span>
+                <span class="font-display font-semibold text-base">Keras</span>
+                <span class="font-display font-semibold text-base">Flask</span>
+                <span class="font-display font-semibold text-base">OpenCV</span>
             </div>
         </section>
 
-        <!-- PAGE SECTION 2: KATALOG PENYAKIT -->
-        <section id="penyakit-section" class="space-y-8">
+        <!-- KATALOG PENYAKIT -->
+        <section id="penyakit-section" class="space-y-9">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
-                <h2 class="text-3xl font-extrabold text-[#132006] leading-tight max-w-md">
+                <h2 class="font-display font-semibold text-3xl leading-tight max-w-md" style="color:var(--ink);">
                     Lima kategori yang bisa dikenali sistem saat ini
                 </h2>
-                <p class="text-sm text-[#4E5D38] md:text-right max-w-sm md:ml-auto">
-                    Setiap kategori memiliki ciri gejala, penyebab, dan penanganan yang berbeda — mulai dari daun sehat hingga infeksi jamur dan parasit.
+                <p class="text-sm md:text-right max-w-sm md:ml-auto" style="color:var(--sage);">
+                    Setiap kategori memiliki gejala, penyebab, dan penanganan yang berbeda — dari daun sehat hingga infeksi jamur dan parasit alga.
                 </p>
             </div>
 
-            <!-- Grid Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                <!-- Card 1 (Highlight Lime Style) -->
-                <div class="bg-gradient-to-b from-[#AEF23B] to-[#93E011] p-6 rounded-[2rem] text-[#132006] shadow-md flex flex-col justify-between">
+                <div class="p-6 rounded-[1.75rem] shadow-md flex flex-col justify-between" style="background:linear-gradient(165deg, var(--lime) 0%, var(--lime-deep) 100%); color:var(--ink);">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-[#132006] text-[#AEF23B] flex items-center justify-center font-bold text-lg mb-4">🍃</div>
-                        <h3 class="font-extrabold text-xl mb-2">Daun Sehat</h3>
-                        <p class="text-xs text-[#22380D] leading-relaxed font-medium">
-                            Daun dalam kondisi optimal, berwarna hijau segar tanpa bintik atau bercak kecokelatan pada permukaan.
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg mb-4" style="background:var(--forest); color:var(--lime);">🍃</div>
+                        <h3 class="font-display font-semibold text-xl mb-2">Daun sehat</h3>
+                        <p class="text-[13px] leading-relaxed font-medium" style="color:#1C3009;">
+                            Berwarna hijau segar dan merata, tanpa bintik atau bercak kecokelatan pada permukaan.
                         </p>
                     </div>
-                    <span class="mt-6 text-[10px] font-bold uppercase tracking-wider bg-[#132006]/10 px-3 py-1 rounded-full w-max">Kondisi Normal</span>
+                    <span class="mt-6 text-[11px] font-bold px-3 py-1 rounded-full w-max" style="background:rgba(16,27,9,.1);">Kondisi normal</span>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="bg-white p-6 rounded-[2rem] border border-[#E3E1D6] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                <div class="p-6 rounded-[1.75rem] border shadow-sm flex flex-col justify-between hover:shadow-md transition" style="background:var(--canvas-card); border-color:var(--line);">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-[#EFEEE7] text-[#132006] flex items-center justify-center font-bold text-lg mb-4">🍂</div>
-                        <h3 class="font-extrabold text-xl text-[#132006] mb-2">Antraknosa</h3>
-                        <p class="text-xs text-[#4E5D38] leading-relaxed">
-                            Disebabkan jamur Colletotrichum, ditandai bercak cokelat kehitaman mengering dari tepi atau ujung daun.
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg mb-4" style="background:var(--canvas); color:var(--ink);">🍂</div>
+                        <h3 class="font-display font-semibold text-xl mb-2" style="color:var(--ink);">Antraknosa</h3>
+                        <p class="text-[13px] leading-relaxed" style="color:var(--sage);">
+                            Disebabkan jamur Colletotrichum — bercak cokelat kehitaman yang mengering dari tepi atau ujung daun.
                         </p>
                     </div>
-                    <span class="mt-6 text-[10px] font-bold uppercase tracking-wider bg-[#F7F9F2] text-[#4E5D38] px-3 py-1 rounded-full w-max">Infeksi Jamur</span>
+                    <span class="mt-6 text-[11px] font-bold px-3 py-1 rounded-full w-max" style="background:var(--canvas); color:var(--sage);">Infeksi jamur</span>
                 </div>
 
-                <!-- Card 3 -->
-                <div class="bg-white p-6 rounded-[2rem] border border-[#E3E1D6] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                <div class="p-6 rounded-[1.75rem] border shadow-sm flex flex-col justify-between hover:shadow-md transition" style="background:var(--canvas-card); border-color:var(--line);">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-[#EFEEE7] text-[#132006] flex items-center justify-center font-bold text-lg mb-4">🔥</div>
-                        <h3 class="font-extrabold text-xl text-[#132006] mb-2">Hawar Daun</h3>
-                        <p class="text-xs text-[#4E5D38] leading-relaxed">
-                            Bercak basah keabu-abuan yang meluas dengan cepat, membuat daun tampak seperti terbakar dan mudah gugur.
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg mb-4" style="background:var(--canvas); color:var(--ink);">🔥</div>
+                        <h3 class="font-display font-semibold text-xl mb-2" style="color:var(--ink);">Hawar daun</h3>
+                        <p class="text-[13px] leading-relaxed" style="color:var(--sage);">
+                            Bercak basah keabu-abuan yang meluas cepat, membuat daun tampak terbakar dan mudah gugur.
                         </p>
                     </div>
-                    <span class="mt-6 text-[10px] font-bold uppercase tracking-wider bg-[#F7F9F2] text-[#4E5D38] px-3 py-1 rounded-full w-max">Infeksi Bakteri/Jamur</span>
+                    <span class="mt-6 text-[11px] font-bold px-3 py-1 rounded-full w-max" style="background:var(--canvas); color:var(--sage);">Infeksi bakteri / jamur</span>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="bg-white p-6 rounded-[2rem] border border-[#E3E1D6] shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                <div class="p-6 rounded-[1.75rem] border shadow-sm flex flex-col justify-between hover:shadow-md transition" style="background:var(--canvas-card); border-color:var(--line);">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-[#EFEEE7] text-[#132006] flex items-center justify-center font-bold text-lg mb-4">🟢</div>
-                        <h3 class="font-extrabold text-xl text-[#132006] mb-2">Bercak Algae</h3>
-                        <p class="text-xs text-[#4E5D38] leading-relaxed">
-                            Bercak kemerahan atau kehijauan beludru di permukaan atas daun yang disebabkan oleh parasit alga dan kelembapan tinggi.
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg mb-4" style="background:var(--canvas); color:var(--ink);">🟢</div>
+                        <h3 class="font-display font-semibold text-xl mb-2" style="color:var(--ink);">Bercak algae</h3>
+                        <p class="text-[13px] leading-relaxed" style="color:var(--sage);">
+                            Bercak kemerahan atau kehijauan berbulu halus di permukaan atas daun, dipicu parasit alga dan kelembapan tinggi.
                         </p>
                     </div>
-                    <span class="mt-6 text-[10px] font-bold uppercase tracking-wider bg-[#F7F9F2] text-[#4E5D38] px-3 py-1 rounded-full w-max">Parasit Alga</span>
+                    <span class="mt-6 text-[11px] font-bold px-3 py-1 rounded-full w-max" style="background:var(--canvas); color:var(--sage);">Parasit alga</span>
                 </div>
 
-                <!-- Card 5 (Dark Style) -->
-                <div class="bg-[#132006] p-6 rounded-[2rem] text-white shadow-md flex flex-col justify-between md:col-span-2">
+                <div class="p-6 rounded-[1.75rem] shadow-md flex flex-col justify-between md:col-span-2" style="background:var(--forest); color:white;">
                     <div>
-                        <div class="w-10 h-10 rounded-full bg-[#22380D] text-[#AEF23B] flex items-center justify-center font-bold text-lg mb-4">🔬</div>
-                        <h3 class="font-extrabold text-xl text-[#AEF23B] mb-2">Penyakit Lainnya & Non-Durian</h3>
-                        <p class="text-xs text-gray-300 leading-relaxed">
-                            Sistem dilengkapi ambang batas (threshold). Jika gambar yang diunggah bukan daun durian atau tingkat kecocokan terlalu rendah, AI secara otomatis akan menolak analisis demi menjaga keakuratan diagnosa dan mencegah kesalahan penanganan. 
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center text-lg mb-4" style="background:var(--forest-2); color:var(--lime);">🔬</div>
+                        <h3 class="font-display font-semibold text-xl mb-2" style="color:var(--lime);">Penyakit lainnya & non-durian</h3>
+                        <p class="text-[13px] leading-relaxed text-white/65">
+                            Sistem memakai ambang batas kecocokan. Jika gambar bukan daun durian, atau kemiripannya terlalu rendah, AI menolak analisis untuk menjaga keakuratan diagnosa dan mencegah kesalahan penanganan.
                         </p>
                     </div>
-                    <span class="mt-6 text-[10px] font-bold uppercase tracking-wider bg-[#22380D] text-[#AEF23B] px-3 py-1 rounded-full w-max">Sistem Proteksi AI</span>
+                    <span class="mt-6 text-[11px] font-bold px-3 py-1 rounded-full w-max" style="background:var(--forest-2); color:var(--lime);">Sistem proteksi AI</span>
                 </div>
 
             </div>
         </section>
 
-        <!-- PAGE SECTION 3: UPLOAD & CARA KERJA -->
-        <section id="analisis-section" class="bg-[#132006] rounded-[2.5rem] p-8 md:p-12 overflow-hidden relative" >
-            <div class="absolute -bottom-6 -left-4 pointer-events-none select-none hidden lg:block">
-                <span class="bg-noise-text">DAUN</span>
-            </div>
+        <!-- UPLOAD & CARA KERJA -->
+        <section id="analisis-section" class="rounded-[2.5rem] p-8 md:p-12 overflow-hidden relative" style="background:var(--forest);">
+            <svg class="absolute -bottom-10 -left-10 opacity-[.05] pointer-events-none select-none hidden lg:block" width="360" height="360" viewBox="0 0 200 200">
+                <path d="M100 10C60 40 20 80 20 120a80 80 0 0 0 160 0c0-40-40-80-80-110Z" stroke="white" stroke-width="1" fill="none"/>
+            </svg>
 
             <div class="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
-                <!-- Kartu Upload (Kiri) -->
                 <div class="lg:col-span-5">
-                    <div class="bg-[#0B1503] rounded-[2rem] p-7 border border-white/10 shadow-xl" id="cara-kerja">
+                    <div class="rounded-[2rem] p-7 border shadow-xl" id="cara-kerja" style="background:#0B1503; border-color:rgba(255,255,255,.08);">
                         <div class="flex justify-between items-center mb-8">
-                            <span class="bg-white/10 text-white text-xs font-semibold px-3 py-1 rounded-full">Diagnosa Cepat</span>
-                            <span class="text-[#AEF23B] text-xl">🌿</span>
+                            <span class="text-white text-xs font-semibold px-3 py-1 rounded-full" style="background:rgba(255,255,255,.08);">Diagnosa cepat</span>
+                            <span class="text-xl" style="color:var(--lime);">🌿</span>
                         </div>
 
                         <form action="/#analisis-section" method="POST" enctype="multipart/form-data" class="space-y-5">
-                            <label for="fileInput" class="block border border-dashed border-[#AEF23B]/50 rounded-2xl p-6 text-center cursor-pointer hover:bg-white/5 transition">
+                            <label for="fileInput" class="block border border-dashed rounded-2xl p-6 text-center cursor-pointer transition" style="border-color:rgba(174,242,59,.4);" onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background='transparent'">
                                 <input type="file" id="fileInput" name="file" accept="image/*" required onchange="previewSelectedImage(event)" class="hidden">
                                 <div id="uploadPrompt" class="space-y-2">
                                     <p class="text-3xl">📷</p>
-                                    <p class="text-xs text-gray-300">Ketuk untuk pilih foto daun durian</p>
+                                    <p class="text-xs text-white/60">Ketuk untuk pilih foto daun durian</p>
                                 </div>
                                 <div id="clientPreviewContainer" class="hidden">
-                                    <img id="clientPreview" src="#" alt="Preview" class="max-h-40 mx-auto rounded-xl border border-white/10">
+                                    <img id="clientPreview" src="#" alt="Preview" class="max-h-40 mx-auto rounded-xl border" style="border-color:rgba(255,255,255,.1);">
                                 </div>
                             </label>
 
-                            <button type="submit" class="w-full bg-[#AEF23B] hover:bg-[#95D91F] text-[#132006] font-extrabold py-3.5 rounded-full transition shadow-md flex items-center justify-center gap-2">
+                            <button type="submit" class="w-full font-extrabold py-3.5 rounded-full transition shadow-md flex items-center justify-center gap-2" style="background:var(--lime); color:var(--ink);">
                                 🔍 Analisis Sekarang
                             </button>
                         </form>
                     </div>
                 </div>
 
-                <!-- Teks & Langkah (Kanan) -->
                 <div class="lg:col-span-7 text-white space-y-8">
                     <div class="space-y-3 max-w-md">
-                        <h2 class="text-3xl font-extrabold">Diagnosa daun durian dalam tiga langkah mudah</h2>
-                        <p class="text-sm text-gray-300 leading-relaxed">
-                            Tidak perlu alat khusus — cukup kamera ponsel dan pencahayaan yang cukup untuk hasil paling akurat. Sistem akan memproses foto daun durian Anda dan memberikan hasil diagnosa beserta rekomendasi pencegahan dan pengobatan.
+                        <h2 class="font-display font-semibold text-3xl">Diagnosa daun durian dalam tiga langkah mudah</h2>
+                        <p class="text-sm text-white/60 leading-relaxed">
+                            Tidak perlu alat khusus — cukup kamera ponsel dan pencahayaan yang cukup untuk hasil paling akurat.
                         </p>
                     </div>
 
                     <div class="space-y-5 max-w-md">
                         <div class="flex items-start gap-4">
-                            <span class="w-9 h-9 rounded-full bg-[#22380D] text-[#AEF23B] flex items-center justify-center font-bold text-sm shrink-0">1</span>
+                            <span class="num-chip w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm shrink-0" style="background:var(--forest-2); color:var(--lime);">1</span>
                             <div>
                                 <p class="font-bold text-sm">Ambil foto satu daun</p>
-                                <p class="text-xs text-gray-400 mt-0.5">Fokuskan kamera pada satu lembar daun dengan latar polos.</p>
+                                <p class="text-xs text-white/45 mt-0.5">Fokuskan kamera pada satu lembar daun dengan latar polos.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <span class="w-9 h-9 rounded-full bg-[#22380D] text-[#AEF23B] flex items-center justify-center font-bold text-sm shrink-0">2</span>
+                            <span class="num-chip w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm shrink-0" style="background:var(--forest-2); color:var(--lime);">2</span>
                             <div>
                                 <p class="font-bold text-sm">Unggah ke sistem</p>
-                                <p class="text-xs text-gray-400 mt-0.5">Foto diproses oleh model MobileNetV2 dalam hitungan detik.</p>
+                                <p class="text-xs text-white/45 mt-0.5">Foto diproses oleh model MobileNetV2 dalam hitungan detik.</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
-                            <span class="w-9 h-9 rounded-full bg-[#22380D] text-[#AEF23B] flex items-center justify-center font-bold text-sm shrink-0">3</span>
+                            <span class="num-chip w-9 h-9 rounded-full flex items-center justify-center font-semibold text-sm shrink-0" style="background:var(--forest-2); color:var(--lime);">3</span>
                             <div>
                                 <p class="font-bold text-sm">Terima hasil & rekomendasi</p>
-                                <p class="text-xs text-gray-400 mt-0.5">Dapatkan diagnosa, tingkat akurasi, dan langkah penanganan yang sesuai. dksjakjdsakjdksaj</p>
+                                <p class="text-xs text-white/45 mt-0.5">Dapatkan diagnosa, tingkat akurasi, dan langkah penanganan yang sesuai.</p>
                             </div>
                         </div>
                     </div>
@@ -300,59 +292,57 @@
 
         <!-- ================= OUTPUT KELUARAN HASIL ================= -->
 
-        <!-- Alert: Bukan Daun Durian -->
         {% if not_durian %}
-        <div class="bg-[#FFFBEB] border border-[#FCD34D] p-6 rounded-[2rem] text-[#92400E] space-y-3">
+        <div class="p-6 rounded-[2rem] space-y-3" style="background:#FFF9E9; border:1px solid #E9CE86; color:#6B4E11;">
             <div class="flex items-center gap-3">
                 <span class="text-2xl">⚠️</span>
-                <h3 class="text-base font-bold">Objek Tidak Terdeteksi Sebagai Daun Durian</h3>
+                <h3 class="text-base font-bold">Objek tidak terdeteksi sebagai daun durian</h3>
             </div>
-            <p class="text-xs">Tingkat keyakinan tertinggi hanya <strong>{{ confidence }}%</strong>. Harap unggah foto daun durian yang lebih jelas dan fokus. agar hasil analisis lebih akurat.</p>
+            <p class="text-xs">Tingkat keyakinan tertinggi hanya <strong>{{ confidence }}%</strong>. Coba unggah foto daun durian yang lebih jelas dan fokus agar hasil analisis lebih akurat.</p>
             {% if image_url %}
             <div class="pt-2 text-center">
-                <img src="{{ image_url }}" alt="Uploaded Image" class="max-h-48 mx-auto rounded-xl border border-[#FCD34D]">
+                <img src="{{ image_url }}" alt="Uploaded Image" class="max-h-48 mx-auto rounded-xl border" style="border-color:#E9CE86;">
             </div>
             {% endif %}
         </div>
         {% endif %}
 
-        <!-- Tampilan Hasil Diagnosa Lengkap -->
         {% if hasil %}
-        <div class="bg-[#132006] text-white p-8 rounded-[2.5rem] shadow-xl space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#22380D] pb-6">
+        <div class="p-8 rounded-[2.5rem] shadow-xl space-y-6" style="background:var(--forest); color:white;">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6" style="border-bottom:1px solid var(--forest-2);">
                 <div>
-                    <span class="bg-[#AEF23B] text-[#132006] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Hasil Diagnosa AI</span>
-                    <h3 class="text-3xl font-black mt-2 text-white">{{ hasil }}</h3>
-                    <p class="text-[#AEF23B] text-xs italic mt-1">Nama Lokal: {{ info.nama_lain }}</p>
+                    <span class="text-[11px] font-bold px-3 py-1 rounded-full" style="background:var(--lime); color:var(--ink);">Hasil diagnosa AI</span>
+                    <h3 class="font-display font-semibold text-3xl mt-2 text-white">{{ hasil }}</h3>
+                    <p class="text-xs italic mt-1" style="color:var(--lime);">Nama lokal: {{ info.nama_lain }}</p>
                 </div>
-                <div class="bg-[#22380D] border border-[#AEF23B]/30 px-6 py-3 rounded-2xl text-right">
-                    <span class="text-[10px] text-gray-400 block uppercase font-semibold">Akurasi</span>
-                    <span class="text-2xl font-black text-[#AEF23B]">{{ confidence }}%</span>
+                <div class="px-6 py-3 rounded-2xl text-right border" style="background:var(--forest-2); border-color:rgba(174,242,59,.25);">
+                    <span class="text-[11px] text-white/45 block font-semibold">Akurasi</span>
+                    <span class="font-display font-semibold text-2xl" style="color:var(--lime);">{{ confidence }}%</span>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {% if image_url %}
                 <div class="md:col-span-4 text-center">
-                    <p class="text-[11px] text-gray-400 mb-2 font-semibold">Foto yang Dianalisis:</p>
-                    <img src="{{ image_url }}" alt="Hasil Analisis" class="max-h-56 mx-auto rounded-2xl border-2 border-[#AEF23B]/40 shadow-lg object-cover">
+                    <p class="text-[11px] text-white/45 mb-2 font-semibold">Foto yang dianalisis</p>
+                    <img src="{{ image_url }}" alt="Hasil Analisis" class="max-h-56 mx-auto rounded-2xl border-2 shadow-lg object-cover" style="border-color:rgba(174,242,59,.35);">
                 </div>
                 {% endif %}
 
                 <div class="md:col-span-8 space-y-4">
                     <div>
-                        <h4 class="text-xs font-bold text-[#AEF23B] uppercase tracking-wider mb-1">📌 Deskripsi Gejala</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed">{{ info.penjelasan }}</p>
+                        <h4 class="text-xs font-bold uppercase tracking-wide mb-1" style="color:var(--lime);">Deskripsi gejala</h4>
+                        <p class="text-[13px] text-white/70 leading-relaxed">{{ info.penjelasan }}</p>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                        <div class="bg-[#1A3300] p-4 rounded-2xl border border-[#22380D]">
-                            <h5 class="text-xs font-bold text-[#AEF23B] uppercase mb-1">🛡️ Pencegahan</h5>
-                            <p class="text-xs text-gray-300 leading-relaxed">{{ info.pencegahan }}</p>
+                        <div class="p-4 rounded-2xl border" style="background:var(--forest-2); border-color:rgba(174,242,59,.15);">
+                            <h5 class="text-xs font-bold uppercase mb-1" style="color:var(--lime);">Pencegahan</h5>
+                            <p class="text-[13px] text-white/70 leading-relaxed">{{ info.pencegahan }}</p>
                         </div>
-                        <div class="bg-[#1A3300] p-4 rounded-2xl border border-[#22380D]">
-                            <h5 class="text-xs font-bold text-[#AEF23B] uppercase mb-1">💊 Pengobatan</h5>
-                            <p class="text-xs text-gray-300 leading-relaxed">{{ info.pengobatan }}</p>
+                        <div class="p-4 rounded-2xl border" style="background:var(--forest-2); border-color:rgba(174,242,59,.15);">
+                            <h5 class="text-xs font-bold uppercase mb-1" style="color:var(--lime);">Pengobatan</h5>
+                            <p class="text-[13px] text-white/70 leading-relaxed">{{ info.pengobatan }}</p>
                         </div>
                     </div>
                 </div>
@@ -360,19 +350,18 @@
         </div>
         {% endif %}
 
-        <!-- Probabilitas -->
         {% if probabilities %}
-        <div class="bg-[#F7F9F2] p-6 md:p-8 rounded-[2rem] border border-[#E3E1D6] space-y-4">
-            <h4 class="text-xs font-black text-[#132006] uppercase tracking-wider mb-2">📊 Distribusi Probabilitas Klasifikasi</h4>
+        <div class="p-6 md:p-8 rounded-[2rem] border space-y-4" style="background:var(--canvas-card); border-color:var(--line);">
+            <h4 class="text-xs font-bold uppercase tracking-wide mb-2" style="color:var(--ink);">Distribusi probabilitas klasifikasi</h4>
             <div class="space-y-3">
                 {% for i in range(labels|length) %}
                 <div class="space-y-1">
-                    <div class="flex justify-between text-xs font-bold text-[#132006]">
+                    <div class="flex justify-between text-xs font-bold" style="color:var(--ink);">
                         <span>{{ labels[i] }}</span>
                         <span>{{ probabilities[i] }}%</span>
                     </div>
-                    <div class="w-full bg-[#EFEEE7] rounded-full h-3 overflow-hidden">
-                        <div class="bg-[#132006] h-3 rounded-full transition-all duration-500" style="width: {{ probabilities[i] }}%"></div>
+                    <div class="w-full rounded-full h-2.5 overflow-hidden" style="background:var(--canvas);">
+                        <div class="h-2.5 rounded-full transition-all duration-500" style="width: {{ probabilities[i] }}%; background:var(--forest);"></div>
                     </div>
                 </div>
                 {% endfor %}
@@ -382,12 +371,11 @@
 
     </main>
 
-    <footer class="max-w-6xl mx-auto px-6 py-10 mt-10 border-t border-[#D8D5C7] flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-[#8A8672]">
+    <footer class="max-w-6xl mx-auto px-6 py-10 mt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs" style="border-top:1px solid var(--line); color:var(--sage-dim);">
         <span>© 2026 DurianAI. Dibangun untuk membantu petani durian Indonesia.</span>
         <span>Model: MobileNetV2 · Dataset: Leaf Durian</span>
     </footer>
 
-    <!-- Script Preview Gambar -->
     <script>
         function previewSelectedImage(event) {
             const input = event.target;
