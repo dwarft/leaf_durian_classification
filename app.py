@@ -24,13 +24,13 @@ DISEASE_INFO = {
     },
     'Hawar_Daun': {
         'nama_lain': 'Bercak Basah / Rhizoctonia Leaf Blight',
-        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh.',
+        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh. kjdskjda dsadaskj',
         'pencegahan': 'Hindari penyiraman berlebihan pada daun di sore hari dan atur jarak tanam agar tidak terlalu rapat.',
         'pengobatan': 'Semprotkan fungisida sistemik berbahan aktif Azoksistrobin atau Kresoksim-metil.'
     },
     'Kanker_Batang': {
         'nama_lain': 'Busuk Phytophthora / Blendok',
-        'penjelasan': 'Disebabkan oleh Phytophthora palmivora. Meski menyerang batang, gejalanya sering muncul berupa daun kuning, layu, dan gugur secara mendadak.',
+        'penjelasan': 'Disebabkan oleh Phytophthora palmivora. Meski menyerang batang, gejalanya sering muncul berupa daun kuning, layu, dan gugur secara mendadak. jskajkdas ksjakdjas kjsakdjsakj jdshajhdas jdsjahdjash jdhsajhdas',
         'pencegahan': 'Pastikan drainase tanah di sekitar perakaran baik dan tidak ada air yang menggenang saat musim hujan.',
         'pengobatan': 'Kupas bagian batang yang sakit lalu oleskan fungisida bahan aktif Asam Phosphit atau Mankozeb.'
     },
