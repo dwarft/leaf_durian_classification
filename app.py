@@ -12,13 +12,13 @@ app = Flask(__name__)
 DISEASE_INFO = {
     'Antraknosa': {
         'nama_lain': 'Bercak Daun Cokelat / Karat Daun',
-        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur. jhdshdsjadssad',
+        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur. jhdshdsjadssad jskajdka',
         'pencegahan': 'Pangkas cabang yang terlalu rimbun agar sirkulasi udara lancar dan kurangi kelembapan di sekitar pohon.',
         'pengobatan': 'Semprotkan fungisida berbahan aktif Mankozeb, Tembaga Hidroksida, atau Difenokonazol sesuai dosis kemasan.'
     },
     'Bercak_Algae': {
         'nama_lain': 'Bercak Ganggang Merah / Karat Merah',
-        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru.',
+        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru. kdsjakj dksjakdjsa',
         'pencegahan': 'Jagalah kebersihan kebun (sanitasi), buang daun yang terinfeksi berat, dan optimalkan pencahayaan matahari.',
         'pengobatan': 'Aplikasikan fungisida/algaesida berbahan aktif Tembaga Oksiklorida (Copper Oxychloride).'
     },
