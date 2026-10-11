@@ -18,7 +18,7 @@ DISEASE_INFO = {
     },
     'Bercak_Algae': {
         'nama_lain': 'Bercak Ganggang Merah / Karat Merah',
-        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru. kdsjakj dksjakdjsa dhsajhds',
+        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru. kdsjakj dksjakdjsa dhsajhds sskdjaks',
         'pencegahan': 'Jagalah kebersihan kebun (sanitasi), buang daun yang terinfeksi berat, dan optimalkan pencahayaan matahari.',
         'pengobatan': 'Aplikasikan fungisida/algaesida berbahan aktif Tembaga Oksiklorida (Copper Oxychloride).'
     },
