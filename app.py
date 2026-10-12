@@ -12,31 +12,31 @@ app = Flask(__name__)
 DISEASE_INFO = {
     'Antraknosa': {
         'nama_lain': 'Bercak Daun Cokelat / Karat Daun',
-        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur. jhdshdsjadssad jskajdka hdsakh ksakdsa',
+        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur.',
         'pencegahan': 'Pangkas cabang yang terlalu rimbun agar sirkulasi udara lancar dan kurangi kelembapan di sekitar pohon.',
         'pengobatan': 'Semprotkan fungisida berbahan aktif Mankozeb, Tembaga Hidroksida, atau Difenokonazol sesuai dosis kemasan.'
     },
     'Bercak_Algae': {
         'nama_lain': 'Bercak Ganggang Merah / Karat Merah',
-        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru. kdsjakj dksjakdjsa dhsajhds sskdjaks',
+        'penjelasan': 'Disebabkan oleh alga Cephaleuros virescens, ditandai dengan bercak bulat agak menimbul berwarna hijau kelabu hingga jingga kecokelatan seperti beludru.',
         'pencegahan': 'Jagalah kebersihan kebun (sanitasi), buang daun yang terinfeksi berat, dan optimalkan pencahayaan matahari.',
         'pengobatan': 'Aplikasikan fungisida/algaesida berbahan aktif Tembaga Oksiklorida (Copper Oxychloride).'
     },
     'Hawar_Daun': {
         'nama_lain': 'Bercak Basah / Rhizoctonia Leaf Blight',
-        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh. kjdskjda dsadaskj hsjahja',
+        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh.',
         'pencegahan': 'Hindari penyiraman berlebihan pada daun di sore hari dan atur jarak tanam agar tidak terlalu rapat.',
         'pengobatan': 'Semprotkan fungisida sistemik berbahan aktif Azoksistrobin atau Kresoksim-metil.'
     },
     'Kanker_Batang': {
         'nama_lain': 'Busuk Phytophthora / Blendok',
-        'penjelasan': 'Disebabkan oleh Phytophthora palmivora. Meski menyerang batang, gejalanya sering muncul berupa daun kuning, layu, dan gugur secara mendadak. jskajkdas ksjakdjas kjsakdjsakj jdshajhdas jdsjahdjash jdhsajhdas dsjakdjask',
+        'penjelasan': 'Disebabkan oleh Phytophthora palmivora. Meski menyerang batang, gejalanya sering muncul berupa daun kuning, layu, dan gugur secara mendadak.',
         'pencegahan': 'Pastikan drainase tanah di sekitar perakaran baik dan tidak ada air yang menggenang saat musim hujan.',
         'pengobatan': 'Kupas bagian batang yang sakit lalu oleskan fungisida bahan aktif Asam Phosphit atau Mankozeb.'
     },
     'Penyakit_Lain': {
         'nama_lain': 'Gejala Non-Spesifik / Hama / Defisiensi Nutrisi',
-        'penjelasan': 'Kerusakan daun bukan disebabkan oleh 4 penyakit utama di atas (bisa karena serangan ulat, kurang pupuk Nitrogen/Kalium, atau terbakar sinar matahari). jdsjajdksaj',
+        'penjelasan': 'Kerusakan daun bukan disebabkan oleh 4 penyakit utama di atas (bisa karena serangan ulat, kurang pupuk Nitrogen/Kalium, atau terbakar sinar matahari).',
         'pencegahan': 'Lakukan pemupukan berimbang (NPK + Mikro) dan cek rutin keberadaan hama fisik di balik daun.',
         'pengobatan': 'Gunakan insektisida sistemik jika ada indikasi serangan hama ulat/kutu, atau beri pupuk daun.'
     },
