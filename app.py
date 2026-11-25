@@ -12,7 +12,7 @@ app = Flask(__name__)
 DISEASE_INFO = {
     'Antraknosa': {
         'nama_lain': 'Bercak Daun Cokelat / Karat Daun',
-        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur. sadsa hsahdjashj dksjakj jdjshjdhas kfjskj jdskajdska dhshjdhjs dsakjdkas',
+        'penjelasan': 'Penyakit akibat jamur Colletotrichum gloeosporioides yang menyebabkan bercak cokelat kehitaman dari ujung/pinggir daun hingga daun mengering dan gugur. sadsa hsahdjashj dksjakj jdjshjdhas kfjskj jdskajdska dhshjdhjs dsakjdkas gyghg',
         'pencegahan': 'Pangkas cabang yang terlalu rimbun agar sirkulasi udara lancar dan kurangi kelembapan di sekitar pohon.',
         'pengobatan': 'Semprotkan fungisida berbahan aktif Mankozeb, Tembaga Hidroksida, atau Difenokonazol sesuai dosis kemasan.'
     },
@@ -24,7 +24,7 @@ DISEASE_INFO = {
     },
     'Hawar_Daun': {
         'nama_lain': 'Bercak Basah / Rhizoctonia Leaf Blight',
-        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh.',
+        'penjelasan': 'Disebabkan oleh jamur Rhizoctonia solani, memicu bercak kebasah-basahan pada daun yang cepat meluas hingga daun terlihat seperti terbakar atau melepuh.', 
         'pencegahan': 'Hindari penyiraman berlebihan pada daun di sore hari dan atur jarak tanam agar tidak terlalu rapat.',
         'pengobatan': 'Semprotkan fungisida sistemik berbahan aktif Azoksistrobin atau Kresoksim-metil.'
     },
